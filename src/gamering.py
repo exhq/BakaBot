@@ -2,6 +2,7 @@ import random
 
 
 async def rps(x, message):
+    x = x.replace("https://", "").replace("http://", "")
     options = ["rock", "paper", "scissors"]
     computer_choice = options[random.randint(0, len(options)-1)]
     computer_choice_index = options.index(computer_choice)
