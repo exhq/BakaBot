@@ -26,16 +26,20 @@ async def rps(x, message):
             await message.channel.send(f"""
  you chose {x}, i chose {item[bruh]}. i win.
  """)
+            return
         else:
             await message.channel.send(f"""
  you chose {x}, i chose {item[bruh]}. you win.
  """)
+            return
     else:
         if winner(x, random.choice(item)):
             await message.channel.send(f"""
             you chose {x}, i chose {item[bruh]}. you win.
             """)
+            return
         else:
             await message.channel.send(f"""
             you chose {x}, i chose {item[bruh]}. i win.
             """)
+            return
