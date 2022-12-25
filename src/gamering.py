@@ -18,10 +18,11 @@ async def rps(x, message):
     bruh = random.randint(0, 2)
     print(x)
     item = ["rock", "paper", "scissors"]
-    if message == item[bruh]:
+    if message == random.choices(item):
         await message.channel.send(f"""
             you chose {x}, i chose {item[bruh]}. lmao its a tie
             """)
+        return
     if x not in item:
         if bruh == 1:
             await message.channel.send(f"""
