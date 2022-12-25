@@ -16,7 +16,9 @@ async def rps(x, message):
     item = ["rock", "paper", "scissors"]
     bruh = random.randint(0, 2)
     print(x)
-    if message == item[bruh]:
+    no = item[bruh]
+    print(no)
+    if message == no:
         await message.channel.send(f"""padoru padoru""")
 
     if x not in item:
