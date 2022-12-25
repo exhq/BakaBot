@@ -13,11 +13,12 @@ def winner(player_choice, computer_choice):
 
 
 async def rps(x, message):
+    item = ["rock", "paper", "scissors"]
     bruh = random.randint(0, 2)
     print(x)
     if message == item[bruh]:
         await message.channel.send(f"""padoru padoru""")
-    item = ["rock", "paper", "scissors"]
+
     if x not in item:
         if bool(bruh):
             await message.channel.send(f"""
