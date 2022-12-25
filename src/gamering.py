@@ -15,7 +15,7 @@ def winner(player_choice, computer_choice):
 
 
 async def rps(x, message):
-    bruh = random.randint(0, 3)
+    bruh = random.randint(0, 2)
     print(x)
     item = ["rock", "paper", "scissors"]
     if message == item[bruh]:
