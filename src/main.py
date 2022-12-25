@@ -1,6 +1,8 @@
 import discord
 from commandprovider import commandprovider
+from scripts import *
 import os
+from discord.ext import commands
 from time import sleep
 import asyncio
 adminperms = [712639419785412668, 268103439614083074,
@@ -17,6 +19,12 @@ async def devcommands(x, message):
         await message.channel.send(" ".join(x[1:]))
     if command == "kill":
         exit()
+    if command == "alias":
+        addalias(x[1], x[2])
+        await message.channel.send(f"{x[1]} has been aliased to {x[2]} ")
+
+
+
 
 
 class MyClient(discord.Client):
@@ -31,6 +39,12 @@ class MyClient(discord.Client):
             await devcommands(content[1:], message)
         elif content.startswith("!"):
             await commandprovider(content[1:], message)
+        elif content.startswith("..."):
+            await message.channel.send(getalias(content[1:]))
+
+
+
+            
 
 
 intents = discord.Intents.default()
