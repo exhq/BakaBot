@@ -1,12 +1,13 @@
 import io
 import random
 from urllib.request import urlopen
-
+import etc
 import discord
 import xmltodict
 from PIL import Image, ImageOps, ImageDraw, ImageFont
 from discord import Message, Attachment
 from discord.ext.commands import Bot, check, Context
+import pathlib
 
 import alias as aliases
 import gamering
@@ -67,6 +68,9 @@ async def dev(context: Context):
 
 @client.command(pass_context=True, invoke_without_command=True)
 async def cute(context: Context):
+    blacklist = pathlib.Path('block')
+    a = blacklist.read_text()
+    print(a)
     lol = []
     choice = context.message.content.split(" ")[1]
     print(choice)
@@ -75,7 +79,8 @@ async def cute(context: Context):
     o = xmltodict.parse(response.read())
     for i in o["posts"]["post"]:
         try:
-            lol.append(i["@sample_url"])
+            if i not in a:
+                lol.append(i["@sample_url"])
         except:
             continue
 
@@ -91,6 +96,12 @@ async def kill(context: Context):
     await context.send("The IRS is gonna get me one day.")
     await client.close()
     exit()
+
+@dev.command(pass_context=True)
+@dev_only
+async def qblock(context: Context):
+    await etc.qblock(context)
+
 
 
 @dev.command(pass_context=True)
