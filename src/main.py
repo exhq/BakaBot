@@ -1,7 +1,7 @@
 import random
 import urllib
 from pprint import pprint
-
+from checkformessages import checkformessages
 import discord
 from discord import Message
 from discord.ext.commands import Bot, check, Context
@@ -86,8 +86,6 @@ async def r34(context: Context):
         await context.send("couldnt find anything")
 
 
-    # get the result code and print it
-
 
 
 
@@ -120,6 +118,13 @@ async def alias(context: Context, short: str, *, long: str):
 
 @client.event
 async def on_message(message: Message):
+    await checkformessages(message)
+
+
+
+
+
+
     await client.process_commands(message)
     if message.author.bot:
         return
