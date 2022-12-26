@@ -66,7 +66,7 @@ async def dev(context: Context):
 
 
 @client.command(pass_context=True, invoke_without_command=True)
-async def r34(context: Context):
+async def cute(context: Context):
     lol = []
     choice = context.message.content.split(" ")[1]
     print(choice)
