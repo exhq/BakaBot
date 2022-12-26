@@ -2,8 +2,8 @@ import discord
 from discord import Message
 from discord.ext.commands import Bot, check, Context
 
-from src import alias as aliases
-from src import gamering
+import alias as aliases
+import gamering
 
 adminperms = [712639419785412668, 268103439614083074,
               867751309923188737, 369197839680536576]
