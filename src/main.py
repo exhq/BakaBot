@@ -1,7 +1,13 @@
+import random
+import urllib
+from pprint import pprint
+
 import discord
 from discord import Message
 from discord.ext.commands import Bot, check, Context
-
+import requests
+from urllib.request import urlopen
+import xmltodict, json
 import os
 import alias as aliases
 from PIL import Image, ImageOps, ImageDraw, ImageFont
@@ -60,9 +66,26 @@ async def dev(context: Context):
     await context.send("Unknown dev command")
 
 
-@client.command(pass_context=True)
+@client.command(pass_context=True, invoke_without_command=True)
 async def r34(context: Context):
-    print("lmao")
+    lol = []
+    choice = context.message.content.split(" ")[1]
+    print(choice)
+    url = "https://safebooru.org/index.php?page=dapi&s=post&q=index&limit=100&pid=0&tags="+choice
+    response = urlopen(url)
+    o = xmltodict.parse(response.read())
+    for i in o["posts"]["post"]:
+        lol.append(i["@sample_url"])
+
+    if not len(lol) == 0:
+        await context.send(random.choice(lol))
+    else:
+        await context.send("couldnt find anything")
+
+
+    # get the result code and print it
+
+
 
 
 
