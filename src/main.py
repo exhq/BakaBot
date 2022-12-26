@@ -75,7 +75,10 @@ async def r34(context: Context):
     response = urlopen(url)
     o = xmltodict.parse(response.read())
     for i in o["posts"]["post"]:
-        lol.append(i["@sample_url"])
+        try:
+            lol.append(i["@sample_url"])
+        except:
+            continue
 
     if not len(lol) == 0:
         await context.send(random.choice(lol))
