@@ -82,21 +82,21 @@ async def cute(context: Context):
     blacklist = pathlib.Path('block')
     a = blacklist.read_text()
     print(a)
-    lol = []
-    choice = context.message.content.split(" ")[1]
-    print(choice)
-    url = "https://safebooru.org/index.php?page=dapi&s=post&q=index&limit=100&pid=0&tags=" + choice
+    among = []
+    uop = context.message.content.split(" ")[1]
+    print(uop, "bleh")
+    url = "https://safebooru.org/index.php?page=dapi&s=post&q=index&limit=100&pid=0&tags=" + uop
+    print(uop)
     response = urlopen(url)
     o = xmltodict.parse(response.read())
     for i in o["posts"]["post"]:
         try:
-            if i not in a:
-                lol.append(i["@sample_url"])
+            among.append(i["@sample_url"])
         except:
             continue
 
-    if not len(lol) == 0:
-        await context.send(random.choice(lol))
+    if not len(among) == 0:
+        await context.send(random.choice(among))
     else:
         await context.send("couldnt find anything")
 
