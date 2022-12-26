@@ -67,6 +67,17 @@ async def dev(context: Context):
 
 
 @client.command(pass_context=True, invoke_without_command=True)
+async def howretard(context: Context, *, lmao: discord.Member):
+    random.seed(str(lmao))
+    test = random.randint(1,100)
+    checknick = ""
+    if lmao.nick == None:
+        checknick = lmao.name
+    else:
+        checknick = lmao.nick
+    await context.reply(f"{checknick} is {test}% retarded")
+
+@client.command(pass_context=True, invoke_without_command=True)
 async def cute(context: Context):
     blacklist = pathlib.Path('block')
     a = blacklist.read_text()
