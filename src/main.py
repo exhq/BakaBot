@@ -142,7 +142,7 @@ async def on_message(message: Message):
     if longform:
         await message.channel.send(longform)
     else:
-        await message.channel.send(f"Unknown alias.")
+        await message.reply("Unknown alias")
 
 
 aliases.load()
