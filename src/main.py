@@ -2,7 +2,9 @@ import discord
 from discord import Message
 from discord.ext.commands import Bot, check, Context
 
+import os
 import alias as aliases
+from PIL import Image, ImageOps, ImageDraw, ImageFont
 import gamering
 
 adminperms = [712639419785412668, 268103439614083074,
@@ -26,6 +28,32 @@ async def on_ready():
     print(f'Logged on as {client.user}!')
 
 
+@client.command(pass_context=True)
+async def caption(context: Context):
+    if context.message.attachments:
+        inp = str(context.message.attachments[0])
+        filename = inp[inp.rfind("/"):]
+        extention = inp[inp.rfind("."):]
+        os.system(f"mkdir -p temp; cd temp; wget {inp}; mv ./{filename} input{extention}; cd ..; ")
+        print()
+        img = Image.open(f"{os.getcwd()}/temp/input{extention}")
+        color = "white"
+        border = (0, 150, 0, 0)
+        new_img = ImageOps.expand(img, border=border, fill=color)
+        new_img.save(f"{os.getcwd()}/temp/out.png")
+
+        im = Image.open(f"{os.getcwd()}/temp/out.png")
+        W, H = im.size
+        dr = ImageDraw.Draw(im)
+        ft = ImageFont.truetype('/usr/share/fonts/TTF/Impact.TTF', 70)
+
+        text = " ".join(context.message.content.split(" ")[1:])
+        _, _, w, h = dr.textbbox((0, 0), text, font=ft)
+        dr.text(((W - w) / 2, 50), text, font=ft, fill=(0,0,0))
+        im.save(f"{os.getcwd()}/temp/out.png")
+        await context.send(file=discord.File(f"{os.getcwd()}/temp/out.png"))
+
+
 @client.group(pass_context=True, invoke_without_command=True)
 @dev_only
 async def dev(context: Context):
@@ -46,12 +74,16 @@ async def echo(context: Context, *, rest: str):
     await context.send(rest)
 
 
+
 @dev.command(pass_context=True)
 @dev_only
 async def alias(context: Context, short: str, *, long: str):
     aliases.set_alias(short, long)
     aliases.save()
     await context.send(f"Alias saved:\n{long}")
+
+
+
 
 
 @client.event
