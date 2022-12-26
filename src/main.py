@@ -131,8 +131,6 @@ async def alias(context: Context, short: str, *, long: str):
 
 @client.event
 async def on_message(message: Message):
-    await checkformessages(message)
-
     await client.process_commands(message)
     if message.author.bot:
         return
@@ -144,7 +142,7 @@ async def on_message(message: Message):
     if longform:
         await message.channel.send(longform)
     else:
-        await message.channel.send(f"Unknown alias {alias}")
+        await message.channel.send(f"Unknown alias.")
 
 
 aliases.load()
