@@ -1,17 +1,16 @@
+import io
 import random
-import urllib
-from pprint import pprint
-from checkformessages import checkformessages
-import discord
-from discord import Message
-from discord.ext.commands import Bot, check, Context
-import requests
 from urllib.request import urlopen
-import xmltodict, json
-import os
-import alias as aliases
+
+import discord
+import xmltodict
 from PIL import Image, ImageOps, ImageDraw, ImageFont
+from discord import Message, Attachment
+from discord.ext.commands import Bot, check, Context
+
+import alias as aliases
 import gamering
+from checkformessages import checkformessages
 
 adminperms = [712639419785412668, 268103439614083074,
               867751309923188737, 369197839680536576, 198407032200626176]
@@ -35,29 +34,29 @@ async def on_ready():
 
 
 @client.command(pass_context=True)
-async def caption(context: Context):
-    if context.message.attachments:
-        inp = str(context.message.attachments[0])
-        filename = inp[inp.rfind("/"):]
-        extention = inp[inp.rfind("."):]
-        os.system(f"mkdir -p temp; cd temp; wget {inp}; mv ./{filename} input{extention}; cd ..; ")
-        print()
-        img = Image.open(f"{os.getcwd()}/temp/input{extention}")
-        color = "white"
-        border = (0, 150, 0, 0)
-        new_img = ImageOps.expand(img, border=border, fill=color)
-        new_img.save(f"{os.getcwd()}/temp/out.png")
+async def caption(context: Context, *, text: str):
+    if not context.message.attachments:
+        return
+    attachment: Attachment = context.message.attachments[0]
+    input_file = io.BytesIO()
+    await attachment.save(input_file)
+    input_file.seek(0)
+    image = Image.open(input_file)
 
-        im = Image.open(f"{os.getcwd()}/temp/out.png")
-        W, H = im.size
-        dr = ImageDraw.Draw(im)
-        ft = ImageFont.truetype('/usr/share/fonts/TTF/Impact.TTF', 70)
+    color = "white"
+    border = (0, 150, 0, 0)
+    image = ImageOps.expand(image, border=border, fill=color)
 
-        text = " ".join(context.message.content.split(" ")[1:])
-        _, _, w, h = dr.textbbox((0, 0), text, font=ft)
-        dr.text(((W - w) / 2, 50), text, font=ft, fill=(0,0,0))
-        im.save(f"{os.getcwd()}/temp/out.png")
-        await context.send(file=discord.File(f"{os.getcwd()}/temp/out.png"))
+    dr = ImageDraw.Draw(image)
+    ft = ImageFont.truetype('/usr/share/fonts/TTF/Impact.TTF', 70)
+
+    _, _, text_width, text_height = dr.textbbox((0, 0), text, font=ft)
+    dr.text(((image.width - text_width) / 2, 50), text, font=ft, fill=(0, 0, 0))
+
+    output_file = io.BytesIO()
+    image.save(output_file, format="png")
+    output_file.seek(0)
+    await context.send(file=discord.File(output_file, filename="caption.png"))
 
 
 @client.group(pass_context=True, invoke_without_command=True)
@@ -71,7 +70,7 @@ async def r34(context: Context):
     lol = []
     choice = context.message.content.split(" ")[1]
     print(choice)
-    url = "https://safebooru.org/index.php?page=dapi&s=post&q=index&limit=100&pid=0&tags="+choice
+    url = "https://safebooru.org/index.php?page=dapi&s=post&q=index&limit=100&pid=0&tags=" + choice
     response = urlopen(url)
     o = xmltodict.parse(response.read())
     for i in o["posts"]["post"]:
@@ -84,10 +83,6 @@ async def r34(context: Context):
         await context.send(random.choice(lol))
     else:
         await context.send("couldnt find anything")
-
-
-
-
 
 
 @dev.command(pass_context=True)
@@ -104,7 +99,6 @@ async def echo(context: Context, *, rest: str):
     await context.send(rest)
 
 
-
 @dev.command(pass_context=True)
 @dev_only
 async def alias(context: Context, short: str, *, long: str):
@@ -113,17 +107,9 @@ async def alias(context: Context, short: str, *, long: str):
     await context.send(f"Alias saved:\n{long}")
 
 
-
-
-
 @client.event
 async def on_message(message: Message):
     await checkformessages(message)
-
-
-
-
-
 
     await client.process_commands(message)
     if message.author.bot:
@@ -137,6 +123,7 @@ async def on_message(message: Message):
         await message.channel.send(longform)
     else:
         await message.channel.send(f"Unknown alias {alias}")
+
 
 aliases.load()
 client.add_command(gamering.rps)

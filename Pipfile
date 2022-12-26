@@ -8,6 +8,7 @@ name = "pypi"
 pillow = "*"
 requests = "*"
 xmltodict = "*"
+aiohttp = "*"
 
 [dev-packages]
 
