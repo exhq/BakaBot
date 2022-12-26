@@ -4,7 +4,7 @@ from discord.ext.commands import Context, command
 
 
 @command()
-async def rps(context: Context, player_choice: str):
+async def rps(context: Context, *, player_choice: str):
     player_choice = player_choice.replace("https://", "").replace("http://", "").lower()
     options = ["rock", "paper", "scissors"]
     computer_choice = random.choice(options)
