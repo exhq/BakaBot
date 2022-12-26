@@ -11,6 +11,7 @@ async def checkformessages(message: Message):
         last_timestamp = float(timer_file.read_text().strip())
         last_timestamp = datetime.datetime.fromtimestamp(last_timestamp)
         time_passed = datetime.datetime.now() - last_timestamp
+        print(time_passed)
         if time_passed < datetime.timedelta(seconds=300):
             return
 
