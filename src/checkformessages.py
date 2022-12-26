@@ -1,5 +1,7 @@
 import datetime
 import pathlib
+import time
+import re
 
 from discord import Message
 
@@ -7,20 +9,18 @@ timer_file = pathlib.Path('timer')
 
 
 async def checkformessages(message: Message):
-    if timer_file.exists():
-        last_timestamp = float(timer_file.read_text().strip())
-        last_timestamp = datetime.datetime.fromtimestamp(last_timestamp)
-        time_passed = datetime.datetime.now() - last_timestamp
-        print(time_passed)
-        if time_passed < datetime.timedelta(seconds=300):
-            return
+    currenttime = int(time.time())
+    pasttime = currenttime - int(timer_file.read_text())
+    print(pasttime)
+    if pasttime < 300:
+        return
 
-    if " touhou " in message.content:
+    shitposts = message.content.split(" ")
+    if "touhou" in shitposts:
         await message.reply("https://cdn.discordapp.com/attachments/918571405212270652/1056934396852191343/to_ho.mp4")
-        return
-
-    if " rent " in message.content:
+    elif "rent" in shitposts:
         await message.reply("https://media.discordapp.net/stickers/1009434642123870298.png")
-        return
+    elif "cyberpunk" in shitposts:
+        await message.reply("https://cdn.discordapp.com/attachments/1050415207849136148/1050427339537920070/bocchi_but_now_with_kid_named_cyberpunk.png")
 
-    timer_file.write_text(str(datetime.datetime.now().timestamp()))
+    timer_file.write_text(str(currenttime))
