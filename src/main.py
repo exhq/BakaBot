@@ -8,7 +8,7 @@ from PIL import Image, ImageOps, ImageDraw, ImageFont
 import gamering
 
 adminperms = [712639419785412668, 268103439614083074,
-              867751309923188737, 369197839680536576]
+              867751309923188737, 369197839680536576, 198407032200626176]
 TOKEN = open("../TOKEN", "r")
 
 
@@ -58,6 +58,12 @@ async def caption(context: Context):
 @dev_only
 async def dev(context: Context):
     await context.send("Unknown dev command")
+
+
+@client.command(pass_context=True)
+async def r34(context: Context):
+    print("lmao")
+
 
 
 @dev.command(pass_context=True)
