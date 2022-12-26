@@ -101,6 +101,27 @@ async def cute(context: Context):
         await context.send("couldnt find anything")
 
 
+@client.command(pass_context=True, invoke_without_command=True)
+async def wot(context: Context):
+        await context.send\
+("""```
+BakaBot version idk
+prefix: !
+cute <name of character>: returns a random picture of the character
+howretard <ping>:         proves that we're all retarded
+rps <word>                play rps with this bitch
+... <alias name>:         can you find them? 
+
+other notable features:
+- autorespond - your messages have a chance of being repleied by BakaBot
+-------------------------------------------------------------------
+    
+    
+thats it for now, please ping me if you have any interesting ideas :)
+-ECHO 
+```""")
+
+
 @dev.command(pass_context=True)
 @dev_only
 async def kill(context: Context):
