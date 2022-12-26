@@ -6,7 +6,7 @@ import os
 
 
 async def checkformessages(message: Message):
-    with open('../timer') as f:
+    with open('timer') as f:
         lines = f.readlines()
         gamering = int(time.time()) - int(lines[0])
         print(gamering)
