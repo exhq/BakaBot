@@ -11,7 +11,7 @@ timer_file = pathlib.Path('timer')
 async def checkformessages(message: Message):
     currenttime = int(time.time())
     aaa = timer_file.read_text()
-    pasttime = currenttime - int(aaa)
+    pasttime = currenttime - int(float(aaa))
     print(pasttime)
     if pasttime < 300:
         return
