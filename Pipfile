@@ -9,6 +9,7 @@ pillow = "*"
 requests = "*"
 xmltodict = "*"
 aiohttp = "*"
+htmlwebshot = "*"
 
 [dev-packages]
 
