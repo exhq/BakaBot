@@ -83,7 +83,7 @@ async def cute(context: Context):
 async def wot(context: Context):
         await context.send\
 ("""```
-BakaBot version idk
+BakaBot2 version idk
 prefix: !
 cute <name of character>: returns a random picture of the character
 howretard <ping>:         proves that we're all retarded
@@ -97,6 +97,7 @@ other notable features:
     
 thats it for now, please ping me if you have any interesting ideas :)
 -ECHO 
+ping everythingonarm now, I forked the bot lol
 ```""")
 
 
