@@ -14,7 +14,7 @@ import gamering
 from checkformessages import checkformessages
 
 adminperms = [712639419785412668, 268103439614083074,
-              867751309923188737, 369197839680536576, 198407032200626176]
+              867751309923188737, 369197839680536576, 198407032200626176, 266994249344614410]
 TOKEN = open("../TOKEN", "r")
 
 
@@ -44,15 +44,21 @@ async def caption(context: Context, *, text: str):
     input_file.seek(0)
     image = Image.open(input_file)
 
+    height, _ = image.size
+    hell = int((height * 20) / 100)
+
     color = "white"
-    border = (0, 150, 0, 0)
+    border = (0, hell, 0, 0)
     image = ImageOps.expand(image, border=border, fill=color)
 
+
+
+
     dr = ImageDraw.Draw(image)
-    ft = ImageFont.truetype('/usr/share/fonts/TTF/Impact.TTF', 70)
+    ft = ImageFont.truetype('/usr/share/fonts/TTF/Impact.TTF', int(hell/2))
 
     _, _, text_width, text_height = dr.textbbox((0, 0), text, font=ft)
-    dr.text(((image.width - text_width) / 2, 50), text, font=ft, fill=(0, 0, 0))
+    dr.text(((image.width - text_width) / 2, hell/4), text, font=ft, fill=(0, 0, 0))
 
     output_file = io.BytesIO()
     image.save(output_file, format="png")

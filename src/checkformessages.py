@@ -16,7 +16,7 @@ async def checkformessages(message: Message):
     if pasttime < 300:
         return
 
-    shitposts = message.content.split(" ")
+    shitposts = message.content.lower().split(" ")
     if "touhou" in shitposts:
         await message.reply("https://cdn.discordapp.com/attachments/918571405212270652/1056934396852191343/to_ho.mp4")
         timer_file.write_text(str(currenttime))
@@ -25,5 +25,9 @@ async def checkformessages(message: Message):
         timer_file.write_text(str(currenttime))
     elif "cyberpunk" in shitposts:
         await message.reply("https://cdn.discordapp.com/attachments/1050415207849136148/1050427339537920070/bocchi_but_now_with_kid_named_cyberpunk.png")
+        timer_file.write_text(str(currenttime))
+    elif "makima" in shitposts:
+        await message.reply(
+            "https://tenor.com/view/makima-bean-beans-chainsaw-man-gif-25992235")
         timer_file.write_text(str(currenttime))
 
