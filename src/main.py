@@ -120,7 +120,7 @@ rps <word>                play rps with this bitch
 ... <alias name>:         can you find them? 
 
 other notable features:
-- autorespond - your messages have a chance of being repleied by BakaBot
+- autorespond - your messages have a chance of being replied by BakaBot
 -------------------------------------------------------------------
     
     
