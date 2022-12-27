@@ -167,6 +167,7 @@ async def alias(context: Context, short: str, *, long: str):
 
 @client.event
 async def on_message(message: Message):
+    await checkformessages(message)
     await client.process_commands(message)
     if message.author.bot:
         return
