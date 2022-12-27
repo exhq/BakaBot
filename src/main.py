@@ -72,6 +72,7 @@ async def dev(context: Context):
     await context.send("Unknown dev command")
 
 
+
 @client.command(pass_context=True, invoke_without_command=True)
 async def howretard(context: Context, *, lmao: discord.Member):
     random.seed(str(lmao))
@@ -134,6 +135,14 @@ async def kill(context: Context):
     await context.send("The IRS is gonna get me one day.")
     await client.close()
     exit()
+
+
+@dev.command(pass_context=True)
+@dev_only
+async def setactivity(context: Context, *, newactivity: str):
+    activity = discord.Game(name=newactivity, type=3)
+    await client.change_presence(status=discord.Status.idle, activity=activity)
+    await context.send("changed activity to " + newactivity)
 
 @dev.command(pass_context=True)
 @dev_only
