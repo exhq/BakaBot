@@ -1,9 +1,10 @@
 import random
-
+from discord.ext import commands
 from discord.ext.commands import Context, command
 
 
 @command()
+@commands.cooldown(1.0, 30.0, commands.BucketType.guild)
 async def rps(context: Context, *, player_choice: str):
     player_choice = player_choice.replace("https://", "").replace("http://", "").lower()
     options = ["rock", "paper", "scissors"]
