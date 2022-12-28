@@ -1,10 +1,11 @@
-
+import io
 import random
 from urllib.request import urlopen
 import etc
+from PIL import Image, ImageOps, ImageDraw, ImageFont
 import discord
 import xmltodict
-from discord import Message
+from discord import Message, Attachment
 from discord.ext import commands
 from discord.ext.commands import Bot, check, Context
 import pathlib
@@ -36,7 +37,34 @@ async def on_ready():
 @client.command(pass_context=True)
 @commands.cooldown(1.0, 30.0, commands.BucketType.guild)
 async def caption(context: Context, *, text: str):
-    await context.reply("temporary out of order.")
+    if not context.message.attachments:
+        return
+    attachment: Attachment = context.message.attachments[0]
+    input_file = io.BytesIO()
+    await attachment.save(input_file)
+    input_file.seek(0)
+    image = Image.open(input_file)
+
+    height, _ = image.size
+    hell = int((height * 20) / 100)
+
+    color = "white"
+    border = (0, hell, 0, 0)
+    image = ImageOps.expand(image, border=border, fill=color)
+
+
+
+
+    dr = ImageDraw.Draw(image)
+    ft = ImageFont.truetype('./Impact.TTF', int(hell/2))
+
+    _, _, text_width, text_height = dr.textbbox((0, 0), text, font=ft)
+    dr.text(((image.width - text_width) / 2, hell/4), text, font=ft, fill=(0, 0, 0))
+
+    output_file = io.BytesIO()
+    image.save(output_file, format="png")
+    output_file.seek(0)
+    await context.send(file=discord.File(output_file, filename="caption.png"))
 
 
 @client.group(pass_context=True, invoke_without_command=True)
