@@ -5,6 +5,7 @@ import etc
 import discord
 import xmltodict
 from discord import Message
+from discord.ext import commands
 from discord.ext.commands import Bot, check, Context
 import pathlib
 import alias as aliases
@@ -33,6 +34,7 @@ async def on_ready():
 
 
 @client.command(pass_context=True)
+@commands.cooldown(1.0, 30.0, commands.BucketType.guild)
 async def caption(context: Context, *, text: str):
     await context.reply("temporary out of order.")
 
@@ -45,6 +47,7 @@ async def dev(context: Context):
 
 
 @client.command(pass_context=True, invoke_without_command=True)
+@commands.cooldown(1.0, 30.0, commands.BucketType.guild)
 async def howretard(context: Context, *, lmao: discord.Member):
     random.seed(str(lmao))
     test = random.randint(1,100)
@@ -55,7 +58,9 @@ async def howretard(context: Context, *, lmao: discord.Member):
         checknick = lmao.nick
     await context.reply(f"{checknick} is {test}% retarded")
 
+'''    
 @client.command(pass_context=True, invoke_without_command=True)
+@commands.cooldown(1.0, 30.0, commands.BucketType.guild)
 async def cute(context: Context):
     blacklist = pathlib.Path('block')
     a = blacklist.read_text()
@@ -77,15 +82,16 @@ async def cute(context: Context):
         await context.send(random.choice(among))
     else:
         await context.send("couldnt find anything")
-
+'''
 
 @client.command(pass_context=True, invoke_without_command=True)
+@commands.cooldown(1.0, 30.0, commands.BucketType.guild)
 async def wot(context: Context):
         await context.send\
 ("""```
 BakaBot2 version idk
 prefix: !
-cute <name of character>: returns a random picture of the character
+(disabled) cute <name of character>: returns a random picture of the character
 howretard <ping>:         proves that we're all retarded
 rps <word>                play rps with this bitch
 ... <alias name>:         can you find them? 
