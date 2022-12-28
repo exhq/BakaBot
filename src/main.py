@@ -105,6 +105,11 @@ thats it for now, please ping me if you have any interesting ideas :)
 -ECHO 
 ping everythingonarm now, I forked the bot lol
 ```""")
+    
+@dev.command(pass_context=True, invoke_without_command=True)
+@dev_only
+async def ping(context: Context):
+        await context.send("pong")
 
 
 @dev.command(pass_context=True)
