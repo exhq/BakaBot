@@ -30,9 +30,9 @@ async def mine(context: Context,):
     global coin
     winchance = randint(1, 5)
     win = 2
-    if winchance >= win
+    if winchance >= win:
         coin = coin * 2
-    else
+    else:
         coin = coin / 2
     text ="You bakas have "
     text +=coin
