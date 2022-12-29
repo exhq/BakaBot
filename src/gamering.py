@@ -42,6 +42,7 @@ async def invest(context: Context,):
         coin = coin * 2
     else:
         coin = coin / 2
+    coint =str(coin)
     text ="You bakas have "
     text +=coin
     text +="bakacoin."
