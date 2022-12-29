@@ -23,7 +23,7 @@ async def balance(context: Context,):
     global coin
     if coin == 1000:
         text ="everythingonarm they did it !!!!!! look!!!!"
-    if coin <= 1000:
+    elif coin <= 1000:
         text = coin
         text +="bakacoin"
     else:
