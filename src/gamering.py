@@ -25,7 +25,7 @@ async def balance(context: Context,):
     if coin == 1000:
         text ="everythingonarm they did it !!!!!! look!!!!"
     elif coin <= 1000:
-        coint =str(coint)
+        coint =str(coin)
         text = coint
         text +="bakacoin"
     else:
@@ -44,7 +44,7 @@ async def invest(context: Context,):
         coin = coin / 2
     coint =str(coin)
     text ="You bakas have "
-    text +=coin
+    text +=coint
     text +="bakacoin."
     await context.send(text) 
     
