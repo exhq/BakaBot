@@ -15,7 +15,7 @@ async def mine(context: Context,):
     coint =str(coin)
     text ="You bakas have "
     text +=coint
-    text +="bakacoin."
+    text +=" bakacoin."
     await context.send(text) 
 
 @command()
@@ -27,7 +27,7 @@ async def balance(context: Context,):
     elif coin <= 1000:
         coint =str(coin)
         text = coint
-        text +="bakacoin"
+        text +=" bakacoin"
     else:
         text ="everythingonarm they did it !!!!!! look!!!!"
     await context.send(text) 
@@ -45,7 +45,7 @@ async def invest(context: Context,):
     coint =str(coin)
     text ="You bakas have "
     text +=coint
-    text +="bakacoin."
+    text +=" bakacoin."
     await context.send(text) 
     
 @command()
