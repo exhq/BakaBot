@@ -16,7 +16,7 @@ from checkformessages import checkformessages
 adminperms = [712639419785412668, 268103439614083074,
               867751309923188737, 369197839680536576, 198407032200626176, 266994249344614410, 710850540229230663]
 TOKEN = open("../TOKEN", "r")
-
+coin = 1
 
 @check
 def dev_only(context: Context):
@@ -195,4 +195,7 @@ async def on_message(message: Message):
 
 aliases.load()
 client.add_command(gamering.rps)
+client.add_command(gamering.mine)
+client.add_command(gamering.balance)
+client.add_command(gamering.invest)
 client.run(TOKEN.read())
