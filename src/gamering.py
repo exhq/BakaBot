@@ -32,7 +32,7 @@ async def balance(context: Context,):
     
 @command()
 @commands.cooldown(1.0, 150.0, commands.BucketType.guild)
-async def mine(context: Context,):
+async def invest(context: Context,):
     global coin
     winchance = randint(1, 5)
     win = 2
