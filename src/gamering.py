@@ -22,12 +22,12 @@ async def mine(context: Context,):
 async def balance(context: Context,):
     global coin
     if coin == 1000:
-    text ="everythingonarm they did it !!!!!! look!!!!"
+        text ="everythingonarm they did it !!!!!! look!!!!"
     if coin <= 1000:
-    text = coin
-    text +="bakacoin"
+        text = coin
+        text +="bakacoin"
     else:
-    text ="everythingonarm they did it !!!!!! look!!!!"
+        text ="everythingonarm they did it !!!!!! look!!!!"
     await context.send(text) 
     
 @command()
