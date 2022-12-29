@@ -16,7 +16,7 @@ from checkformessages import checkformessages
 adminperms = [712639419785412668, 268103439614083074,
               867751309923188737, 369197839680536576, 198407032200626176, 266994249344614410, 710850540229230663]
 TOKEN = open("../TOKEN", "r")
-coin = 1
+
 
 @check
 def dev_only(context: Context):
@@ -122,7 +122,10 @@ prefix: !
 (disabled) cute <name of character>: returns a random picture of the character
 howretard <ping>:         proves that we're all retarded
 rps <word>                play rps with this bitch
-... <alias name>:         can you find them? 
+... <alias name>:         can you find them?
+mine                      mines 1 bakacoin, can be used 1 time every 5 minutes not server wide
+invest                    invests all the bakacoin, higher canche of halving the coins than doubling them, only way to win in reasonable times
+balance                   prints balance
 
 other notable features:
 - autorespond - your messages have a chance of being replied by BakaBot
