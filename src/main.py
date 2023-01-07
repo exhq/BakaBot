@@ -47,7 +47,10 @@ async def dev(context: Context):
 @client.command(pass_context=True, invoke_without_command=True)
 async def howretard(context: Context, *, lmao: discord.Member):
     random.seed(str(lmao))
-    test = random.randint(1,100)
+    if ctx.author.id in adminperms:
+      test = 2147483647 #playing it safe. dunno if the shits running on a 64bit machine. or if python has unsigned ints
+    else:
+      test = random.randint(1,100)
     checknick = ""
     if lmao.nick == None:
         checknick = lmao.name
