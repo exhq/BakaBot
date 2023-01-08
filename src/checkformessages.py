@@ -30,4 +30,9 @@ async def checkformessages(message: Message):
         await message.reply(
             "https://tenor.com/view/makima-bean-beans-chainsaw-man-gif-25992235")
         timer_file.write_text(str(currenttime))
+    elif "turkey" in shitposts:
+        await message.reply(
+            "https://tenor.com/view/astolfo-turkey-turkish-rider-of-black-akif-gif-26672595")
+        timer_file.write_text(str(currenttime))
+
 
