@@ -18,7 +18,7 @@ async def on_ready():
 
 @client.command(pass_context=True, invoke_without_command=True)
 async def ping(context: Context):
-    await context.reply("kir khar")
+    await context.reply("hello im not a bad person and i dont swear")
 
 
 
